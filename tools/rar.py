@@ -1,7 +1,7 @@
 import os
 import subprocess
 import time
-from tools.status import format_duration, print_summary, print_result_success
+from tools.status import TEXT, format_duration, print_summary, print_result_success
 
 def rar_folder(input_path, output_path):
     subprocess.run(["apt-get", "install", "rar", "-y"], stdout=subprocess.DEVNULL)
@@ -33,7 +33,7 @@ def rar_folder(input_path, output_path):
     rar_file_name = os.path.basename(rar_file_path)
 
     print_summary("Ringkasan File/Folder:", total_files, total_size,
-                  f"Nama file RAR     : {rar_file_name}", rar_file_path)
+                  f"{TEXT['nama_file_rar']:<17}: {rar_file_name}", rar_file_path)
 
     os.chdir(os.path.dirname(input_path))
     print("🚀 Memulai proses kompresi...\n")
