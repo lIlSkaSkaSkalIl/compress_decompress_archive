@@ -1,5 +1,5 @@
 
-# 📦 compress_decompress_archive
+# 📦 Compress Decompress Archive
 
 Alat sederhana untuk melakukan kompresi dan dekompresi file/folder dengan dukungan untuk format `.zip` dan `.rar`. Didesain untuk digunakan langsung di Google Colab.
 
@@ -45,12 +45,12 @@ run_tool(metode, input_path, output_path)
 
 ## ⚠️ Penjelasan output_path
 
-| Metode     | Output path perlu nama file? | Contoh output_path                                |
+| Metode     | nama file? | Contoh output_path                                |
 |------------|-------------------------------|----------------------------------------------------|
-| `zip`      | ✅ Ya                         | `/content/drive/MyDrive/folder_hasil/arsip_final` |
-| `rar`      | ✅ Ya                         | `/content/drive/MyDrive/folder_hasil/arsip_final` |
-| `unzip`    | ❌ Tidak                      | `/content/drive/MyDrive/folder_ekstrak`           |
-| `unrar`    | ❌ Tidak                      | `/content/drive/MyDrive/folder_ekstrak`           |
+| `zip`      | ✅                          | `/content/drive/MyDrive/folder_hasil/arsip_final` |
+| `rar`      | ✅                          | `/content/drive/MyDrive/folder_hasil/arsip_final` |
+| `unzip`    | ❌                       | `/content/drive/MyDrive/folder_ekstrak`           |
+| `unrar`    | ❌                       | `/content/drive/MyDrive/folder_ekstrak`           |
 
 > Untuk metode `zip` dan `rar`, sistem akan menambahkan `.zip` atau `.rar` secara otomatis di belakang nama output yang Anda berikan.
 
