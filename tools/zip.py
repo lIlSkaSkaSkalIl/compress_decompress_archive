@@ -34,7 +34,7 @@ def zip_folder(input_path, output_path):
     print("🚀 Memulai proses kompresi...\n")
     start_time = time.time()
 
-    with zipfile.ZipFile(zip_file_path, 'w', compression=zipfile.ZIP_DEFLATED) as zipf:
+    with zipfile.ZipFile(zip_file_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zipf:
         for i, (abs_path, rel_path) in enumerate(file_list, start=1):
             print(f"📦 [{i}/{total_files}] Menambahkan: {rel_path} ... ", end="")
             try:
