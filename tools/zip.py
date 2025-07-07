@@ -1,7 +1,7 @@
 import os
 import zipfile
 import time
-from tools.status import format_duration, print_summary, print_result_success
+from tools.status import TEXT, format_duration, print_summary, print_result_success
 
 def zip_folder(input_path, output_path):
     total_files, total_size, file_list = 0, 0, []
@@ -29,7 +29,7 @@ def zip_folder(input_path, output_path):
     zip_file_name = os.path.basename(zip_file_path)
 
     print_summary("Ringkasan File/Folder:", total_files, total_size,
-                  f"Nama file ZIP     : {zip_file_name}", zip_file_path)
+                  f"{TEXT['nama_file_zip']:<17}: {zip_file_name}", zip_file_path)
 
     print("🚀 Memulai proses kompresi...\n")
     start_time = time.time()
