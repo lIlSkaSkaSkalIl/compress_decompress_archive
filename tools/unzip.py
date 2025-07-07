@@ -1,7 +1,12 @@
 import os
 import zipfile
 import time
-from tools.status import format_duration, format_size, print_result_success
+from tools.status import (
+    format_duration,
+    format_size,
+    print_result_success,
+    print_file_info,
+)
 
 def unzip_file(input_path, output_path):
     if not os.path.exists(input_path):
@@ -9,10 +14,8 @@ def unzip_file(input_path, output_path):
 
     zip_file_name = os.path.basename(input_path)
     zip_file_size = os.path.getsize(input_path)
-    print("📊 Informasi File ZIP:")
-    print(f"╭📦 Nama file ZIP     : {zip_file_name}")
-    print(f"├📏 Ukuran file ZIP   : {format_size(zip_file_size)}")
-    print(f"╰📂 Lokasi output     : {output_path}\n")
+
+    print_file_info("Informasi File ZIP:", zip_file_name, zip_file_size, output_path)
 
     os.makedirs(output_path, exist_ok=True)
 
