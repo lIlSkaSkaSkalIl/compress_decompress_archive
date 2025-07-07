@@ -1,8 +1,6 @@
 import os
 import tarfile
 import time
-import gzip
-import lzma
 from tools.status import TEXT, format_duration, print_summary, print_result_success
 
 def tar_folder(input_path, output_path, method="gz"):
@@ -15,8 +13,8 @@ def tar_folder(input_path, output_path, method="gz"):
 
     if os.path.isfile(input_path):
         file_list.append((input_path, os.path.basename(input_path)))
-        total_files = 1
         total_size = os.path.getsize(input_path)
+        total_files = 1
     else:
         for root, _, files in os.walk(input_path):
             for f in files:
@@ -41,9 +39,17 @@ def tar_folder(input_path, output_path, method="gz"):
 
     mode = "w:gz" if method == "gz" else "w:xz" if method == "xz" else "w"
 
+    success = 0
     try:
         with tarfile.open(tar_path, mode) as tarf:
-            tarf.add(input_path, arcname=os.path.basename(input_path))
+            for i, (abs_path, rel_path) in enumerate(file_list, start=1):
+                print(f"📦 [{i}/{total_files}] Menambahkan: {rel_path} ... ", end="")
+                try:
+                    tarf.add(abs_path, arcname=rel_path)
+                    print("OK")
+                    success += 1
+                except Exception as e:
+                    print(f"GAGAL ({str(e)})")
     except Exception as e:
         print(f"❌ Gagal membuat file TAR: {e}")
         return
@@ -52,6 +58,6 @@ def tar_folder(input_path, output_path, method="gz"):
 
     if os.path.exists(tar_path):
         size = os.path.getsize(tar_path)
-        print_result_success("Kompresi selesai:", archive_name, size, jumlah=total_files, durasi=duration)
+        print_result_success("Kompresi selesai:", archive_name, size, jumlah=f"{success}/{total_files}", durasi=duration)
     else:
         print("❌ File TAR tidak ditemukan setelah proses selesai.")
