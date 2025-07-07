@@ -1,4 +1,4 @@
-# 📦 Compress Decompress
+# 📦 Compress Decompress Archive
 
 Alat bantu untuk kompresi dan dekompresi file/folder di Google Colab menggunakan format ZIP dan RAR.
 
