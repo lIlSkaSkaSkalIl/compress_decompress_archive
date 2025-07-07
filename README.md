@@ -1,102 +1,105 @@
-# 📦 Compress Decompress Archive
 
-Alat bantu untuk kompresi dan dekompresi file/folder di Google Colab menggunakan format ZIP dan RAR.
+# 📦 compress_decompress_archive
 
-Mendukung:
-- ✅ ZIP (kompres)
-- ✅ UNZIP (ekstrak)
-- ✅ RAR (kompres)
-- ✅ UNRAR (ekstrak)
+Alat sederhana untuk melakukan kompresi dan dekompresi file/folder dengan dukungan untuk format `.zip` dan `.rar`. Didesain untuk digunakan langsung di Google Colab.
 
 ---
 
-## 🚀 Cara Penggunaan di Google Colab
+## 🧪 Fitur
 
-### 1️⃣ Cell Pertama: Clone Repo & Setup
+- ✅ Kompres folder/file ke `.zip` dan `.rar`
+- ✅ Ekstrak file `.zip` dan `.rar`
+- ✅ Progress ditampilkan (misal: `[3/20]`)
+- ✅ Ringkasan jumlah file, ukuran, durasi
+- ✅ Tidak perlu upload file `.ipynb`, cukup clone repo dan jalankan!
 
+---
+
+## 🧑‍💻 Penggunaan di Google Colab
+
+### 📥 Cell 1: Clone Repo & Setup
 ```python
-# @title 🔧 Setup Tools
-
-# Clone repo (jika belum)
+# @title 📦 Setup Project
 !git clone https://github.com/lIlSkaSkaSkalIl/compress_decompress_archive.git || echo "Repo sudah ada"
 
-# Tambahkan folder tools ke sys.path agar bisa di-import
 import sys
 sys.path.append("/content/compress_decompress_archive/tools")
-
-# Import fungsi utama
-from compress_tool import run_tool
 ```
 
----
-
-### 2️⃣ Cell Kedua: Pilih Metode & Jalankan
-
+### 🚀 Cell 2: Jalankan Alat
 ```python
-# @title ⚙️ Jalankan Kompres / Ekstrak
+# @title 🛠️ Jalankan Kompresi/Dekompresi
+from compress_tool import run_tool
 
-# 👉 Pilihan metode: zip, unzip, rar, unrar
+# Pilihan metode: "zip", "unzip", "rar", "unrar"
 metode = "zip"  # @param ["zip", "unzip", "rar", "unrar"]
 
-# 👉 Masukkan path file/folder input & output
-input_path = "/content/drive/MyDrive/contoh_folder"  # @param {type:"string"}
-output_path = "/content/drive/MyDrive/hasil_kompres"  # @param {type:"string"}
+# Path input dan output
+input_path = "/content/drive/MyDrive/folder_sumber"  # @param {type:"string"}
+output_path = "/content/drive/MyDrive/folder_hasil/final"  # @param {type:"string"}
 
-# 🚀 Jalankan
 run_tool(metode, input_path, output_path)
 ```
 
 ---
 
-## 📂 Struktur Direktori
+## ⚠️ Penjelasan output_path
+
+| Metode     | Output path perlu nama file? | Contoh output_path                                |
+|------------|-------------------------------|----------------------------------------------------|
+| `zip`      | ✅ Ya                         | `/content/drive/MyDrive/folder_hasil/arsip_final` |
+| `rar`      | ✅ Ya                         | `/content/drive/MyDrive/folder_hasil/arsip_final` |
+| `unzip`    | ❌ Tidak                      | `/content/drive/MyDrive/folder_ekstrak`           |
+| `unrar`    | ❌ Tidak                      | `/content/drive/MyDrive/folder_ekstrak`           |
+
+> Untuk metode `zip` dan `rar`, sistem akan menambahkan `.zip` atau `.rar` secara otomatis di belakang nama output yang Anda berikan.
+
+---
+
+## 🖨️ Contoh Output
+
+```
+📦 Metode yang dipilih: ZIP
+
+📊 Ringkasan File/Folder:
+╭📁 Jumlah file      : 15
+├💾 Total ukuran     : 1.45 GB
+├📦 Nama file ZIP    : arsip_final.zip
+╰🎯 Lokasi output    : /content/drive/MyDrive/folder_hasil/arsip_final.zip
+
+🚀 Memulai proses kompresi...
+
+📦 [1/15] Menambahkan: file1.mkv ... OK
+📦 [2/15] Menambahkan: file2.srt ... OK
+...
+
+✅ Kompresi selesai:
+╭📦 Nama file         : arsip_final.zip
+├📏 Ukuran file       : 1.12 GB
+╰⏱️ Durasi proses     : 2 menit 45 detik
+```
+
+---
+
+## 📁 Struktur Proyek
 
 ```
 compress_decompress_archive/
+│
 ├── tools/
 │   ├── compress_tool.py
-│   ├── rar.py
-│   ├── unrar.py
 │   ├── zip.py
 │   ├── unzip.py
+│   ├── rar.py
+│   ├── unrar.py
 │   └── status.py
+│
 └── README.md
 ```
 
 ---
 
-## ✅ Fitur
+## 🙋 Kontak
 
-- Tampilan progres setiap file [✔]
-- Ringkasan sebelum & sesudah proses [✔]
-- Output format rapi dan informatif [✔]
-- Tanpa library eksternal tambahan [✔]
-
----
-
-## 💡 Contoh Output di Colab
-
-```
-📦 Metode yang dipilih: ZIP
-📊 Ringkasan File/Folder:
-╭📁 Jumlah file      : 12
-├💾 Total ukuran     : 534.25 MB
-├📦 Nama file ZIP    : hasil.zip
-╰🎯 Lokasi output    : /content/hasil.zip
-
-📦 [1/12] Menambahkan: file1.mkv ... OK
-📦 [2/12] Menambahkan: file2.mkv ... OK
-...
-
-✅ Kompresi selesai:
-╭📦 Nama file         : hasil.zip
-├📏 Ukuran file       : 517.88 MB
-╰⏱️ Durasi proses     : 13 detik
-```
-
----
-
-## 📬 Kontak
-
-Dibuat oleh: [Ska RegGae](https://github.com/lIlSkaSkaSkalIl)
-
-Silakan gunakan dan modifikasi sesuai kebutuhan.
+> Dibuat oleh Ska RegGae  
+GitHub: [@lIlSkaSkaSkalIl](https://github.com/lIlSkaSkaSkalIl)
