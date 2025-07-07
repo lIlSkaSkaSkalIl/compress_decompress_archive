@@ -36,11 +36,16 @@ def seven_zip_folder(input_path, output_path):
                   f"{'Nama file 7Z':<17}: {archive_name}", output_7z)
 
     os.chdir(os.path.dirname(input_path))
-    print("🚀 Memulai proses kompresi...\n")
+
+    print("📦 Menyiapkan file:")
+    for i, (_, rel_path) in enumerate(file_list, start=1):
+        print(f"📦 [{i}/{total_files}] {rel_path}")
+
+    print("\n🚀 Memulai proses kompresi dengan 7z...\n")
     start_time = time.time()
 
     try:
-        result = subprocess.run(
+        subprocess.run(
             ["7z", "a", "-t7z", "-mx=9", output_7z, os.path.basename(input_path)],
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True
         )
