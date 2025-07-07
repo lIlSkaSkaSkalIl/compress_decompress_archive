@@ -103,3 +103,5 @@ compress_decompress_archive/
 
 > Dibuat oleh Ska RegGae  
 GitHub: [@lIlSkaSkaSkalIl](https://github.com/lIlSkaSkaSkalIl)
+
+Silakan gunakan dan modifikasi sesuai kebutuhan.
