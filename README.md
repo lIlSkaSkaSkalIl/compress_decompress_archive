@@ -20,10 +20,17 @@ Alat sederhana untuk melakukan kompresi dan dekompresi file/folder dengan dukung
 ### 📥 Cell 1: Clone Repo & Setup
 ```python
 # @title 📦 Setup Project
-!git clone https://github.com/lIlSkaSkaSkalIl/compress_decompress_archive.git || echo "Repo sudah ada"
+# Clone repo jika belum ada
+import os
+if not os.path.exists("/content/compress_decompress_archive"):
+    !git clone https://github.com/lIlSkaSkaSkalIl/compress_decompress_archive.git
 
+# Tambahkan path ke sys.path agar bisa import module
 import sys
-sys.path.append("/content/compress_decompress_archive/tools")
+sys.path.append("/content/compress_decompress_archive")
+
+# ✅ Siap digunakan
+print("✅ Repo siap digunakan.")
 ```
 
 ### 🚀 Cell 2: Jalankan Alat
