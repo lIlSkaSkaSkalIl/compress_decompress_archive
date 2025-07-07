@@ -1,7 +1,12 @@
 import os
 import subprocess
 import time
-from tools.status import format_duration, format_size, print_result_success
+from tools.status import (
+    format_duration,
+    format_size,
+    print_result_success,
+    print_file_info,
+)
 
 def unrar_file(input_path, output_path):
     if not os.path.exists(input_path):
@@ -12,10 +17,7 @@ def unrar_file(input_path, output_path):
     rar_file_name = os.path.basename(input_path)
     rar_file_size = os.path.getsize(input_path)
 
-    print("📊 Informasi File RAR:")
-    print(f"╭📦 Nama file RAR     : {rar_file_name}")
-    print(f"├📏 Ukuran file RAR   : {format_size(rar_file_size)}")
-    print(f"╰📂 Lokasi output     : {output_path}\n")
+    print_file_info("Informasi File RAR:", rar_file_name, rar_file_size, output_path)
 
     os.makedirs(output_path, exist_ok=True)
 
