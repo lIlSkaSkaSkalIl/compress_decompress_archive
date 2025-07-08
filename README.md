@@ -1,90 +1,100 @@
-
 # 📦 Compress Decompress Archive
 
-Alat sederhana untuk melakukan kompresi dan dekompresi file/folder dengan dukungan untuk format `.zip` dan `.rar`. Didesain untuk digunakan langsung di Google Colab.
+Alat sederhana untuk melakukan kompresi dan dekompresi file/folder dengan dukungan berbagai format arsip. Dirancang untuk digunakan langsung di Google Colab tanpa perlu upload file `.ipynb`.
 
 ---
 
 ## 🧪 Fitur
 
-- ✅ Kompres folder/file ke `.zip` dan `.rar`
-- ✅ Ekstrak file `.zip` dan `.rar`
-- ✅ Progress ditampilkan (misal: `[3/20]`)
-- ✅ Ringkasan jumlah file, ukuran, durasi
-- ✅ Tidak perlu upload file `.ipynb`, cukup clone repo dan jalankan!
+- ✅ Kompres folder/file ke `.zip`, `.rar`, `.7z`, `.tar`, `.tar.gz`, `.tar.xz`
+- ✅ Ekstrak file dari semua format di atas
+- ✅ Progress per file (misal: `[3/20] Extracting ... OK`)
+- ✅ Ringkasan jumlah file, ukuran total, dan durasi
+- ✅ Siap digunakan di Google Colab, tinggal clone dan jalan!
 
 ---
 
 ## 🧑‍💻 Penggunaan di Google Colab
 
 ### 📥 Cell 1: Clone Repo & Setup
+
 ```python
 # @title 📦 Setup Project
-# Clone repo jika belum ada
 import os
 if not os.path.exists("/content/compress_decompress_archive"):
     !git clone https://github.com/lIlSkaSkaSkalIl/compress_decompress_archive.git
 
-# Tambahkan path ke sys.path agar bisa import module
 import sys
 sys.path.append("/content/compress_decompress_archive")
-
-# ✅ Siap digunakan
 print("✅ Repo siap digunakan.")
 ```
 
-### 🚀 Cell 2: Jalankan Alat
+---
+
+### 🚀 Cell 2: Jalankan Alat Kompresi / Dekompresi
+
 ```python
-# @title 🛠️ Jalankan Kompresi/Dekompresi
-from compress_tool import run_tool
+# @title ⚙️ Kompresi / Dekompresi
 
-# Pilihan metode: "zip", "unzip", "rar", "unrar"
-metode = "zip"  # @param ["zip", "unzip", "rar", "unrar"]
+from tools.compress_tool import run_tool
 
-# Path input dan output
+# 👉 Pilih metode dan path
+metode = "zip"  # @param ["zip", "unzip", "rar", "unrar", "7z", "un7z", "tar", "untar"]
+tar_method = "gz"  # @param ["gz", "xz", "none"]
 input_path = "/content/drive/MyDrive/folder_sumber"  # @param {type:"string"}
-output_path = "/content/drive/MyDrive/folder_hasil/final"  # @param {type:"string"}
+output_path = "/content/drive/MyDrive/folder_hasil/arsip_final"  # @param {type:"string"}
 
-run_tool(metode, input_path, output_path)
+# 🚀 Jalankan
+if metode == "tar":
+    run_tool(metode, input_path, output_path, tar_method=tar_method)
+else:
+    run_tool(metode, input_path, output_path)
 ```
 
 ---
 
-## ⚠️ Penjelasan output_path
+## ⚠️ Penjelasan `output_path`
 
-| Metode     | nama file? | Contoh output_path                                |
-|------------|-------------------------------|----------------------------------------------------|
-| `zip`      | ✅                          | `/content/drive/MyDrive/folder_hasil/arsip_final` |
-| `rar`      | ✅                          | `/content/drive/MyDrive/folder_hasil/arsip_final` |
-| `unzip`    | ❌                       | `/content/drive/MyDrive/folder_ekstrak`           |
-| `unrar`    | ❌                       | `/content/drive/MyDrive/folder_ekstrak`           |
+| Metode     | Perlu Nama File? | Ekstensi Otomatis | Contoh `output_path`                        |
+|------------|------------------|-------------------|---------------------------------------------|
+| `zip`      | ✅ Ya             | `.zip`            | `/path/final_backup`                        |
+| `rar`      | ✅ Ya             | `.rar`            | `/path/final_backup`                        |
+| `7z`       | ✅ Ya             | `.7z`             | `/path/final_backup`                        |
+| `tar`      | ✅ Ya             | `.tar`, `.tar.gz`, `.tar.xz` | `/path/final_backup`            |
+| `unzip`    | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
+| `unrar`    | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
+| `un7z`     | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
+| `untar`    | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
 
-> Untuk metode `zip` dan `rar`, sistem akan menambahkan `.zip` atau `.rar` secara otomatis di belakang nama output yang Anda berikan.
+> Untuk metode kompresi (`zip`, `rar`, `7z`, `tar`), sistem akan menambahkan ekstensi secara otomatis.
 
 ---
 
-## 🖨️ Contoh Output
+## 🚀 Simulasi Kecepatan Kompresi
 
-```
-📦 Metode yang dipilih: ZIP
+Berikut adalah hasil simulasi waktu kompresi pada file **100MB**, dengan dua tipe file:
 
-📊 Ringkasan File/Folder:
-╭📁 Jumlah file      : 15
-├💾 Total ukuran     : 1.45 GB
-├📦 Nama file ZIP    : arsip_final.zip
-╰🎯 Lokasi output    : /content/drive/MyDrive/folder_hasil/arsip_final.zip
+- 🎬 **File video (sudah dikompresi)**: `.mkv`
+- 📝 **File teks/CSV (mudah dikompresi)**: `.csv`
 
-🚀 Memulai proses kompresi...
+| Format    | Tipe File   | Ukuran Output | Durasi    | Rasio Kompresi |
+|-----------|-------------|---------------|-----------|----------------|
+| `zip`     | Video       | 99.7 MB       | ~8 detik  | 🔻 Hampir sama |
+| `rar`     | Video       | 99.6 MB       | ~9 detik  | 🔻 Hampir sama |
+| `7z`      | Video       | 99.6 MB       | ~5+ menit | 🔻 Sama, tapi lambat |
+| `tar`     | Video       | 100.1 MB      | ~7 detik  | ⚠️ Tidak kompres |
+| `tar.gz`  | Video       | 99.8 MB       | ~2+ menit | 🔻 Kompres ringan |
+| `tar.xz`  | Video       | 99.5 MB       | ~3+ menit | 🔻 Lebih kecil, tapi sangat lambat |
+| `zip`     | CSV         | 12.3 MB       | ~6 detik  | ✅ Kompres besar |
+| `rar`     | CSV         | 11.7 MB       | ~7 detik  | ✅ Kompres besar |
+| `7z`      | CSV         | 10.4 MB       | ~4+ menit | ✅ Maksimal, tapi lambat |
+| `tar.gz`  | CSV         | 11.5 MB       | ~2+ menit | ✅ Kompres besar |
+| `tar.xz`  | CSV         | 10.2 MB       | ~3+ menit | ✅ Kompres maksimum |
 
-📦 [1/15] Menambahkan: file1.mkv ... OK
-📦 [2/15] Menambahkan: file2.srt ... OK
-...
-
-✅ Kompresi selesai:
-╭📦 Nama file         : arsip_final.zip
-├📏 Ukuran file       : 1.12 GB
-╰⏱️ Durasi proses     : 2 menit 45 detik
-```
+📌 **Kesimpulan**:
+- Untuk **kecepatan**, gunakan: `zip`, `rar`, atau `tar`
+- Untuk **kompresi maksimal**, gunakan: `7z`, `tar.xz` (namun sangat lambat)
+- Untuk file video, **kompresi tidak memberi banyak pengurangan ukuran**
 
 ---
 
@@ -95,10 +105,10 @@ compress_decompress_archive/
 │
 ├── tools/
 │   ├── compress_tool.py
-│   ├── zip.py
-│   ├── unzip.py
-│   ├── rar.py
-│   ├── unrar.py
+│   ├── zip.py / unzip.py
+│   ├── rar.py / unrar.py
+│   ├── sevenzip.py / un7zip.py
+│   ├── tar.py / untar.py
 │   └── status.py
 │
 └── README.md
@@ -111,4 +121,4 @@ compress_decompress_archive/
 > Dibuat oleh Ska RegGae  
 GitHub: [@lIlSkaSkaSkalIl](https://github.com/lIlSkaSkaSkalIl)
 
-Silakan gunakan dan modifikasi sesuai kebutuhan.
+Silakan gunakan, fork, dan modifikasi sesuai kebutuhan proyekmu!
