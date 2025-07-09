@@ -36,7 +36,7 @@ print("✅ Repo siap digunakan.")
 ```python
 # @title ⚙️ Kompresi / Dekompresi
 
-from tools.compress_tool import run_tool
+from tools.archive_tool import run_tool
 
 # 👉 Pilih metode dan path
 metode = "zip"  # @param ["zip", "unzip", "rar", "unrar", "7z", "un7z", "tar", "untar"]
