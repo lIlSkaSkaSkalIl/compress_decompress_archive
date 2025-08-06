@@ -57,10 +57,10 @@ else:
 
 | Metode     | Perlu Nama File? | Ekstensi Otomatis | Contoh `output_path`                        |
 |------------|------------------|-------------------|---------------------------------------------|
-| `zip`      | ✅ Ya             | `.zip`            | `/path/final_backup`                        |
-| `rar`      | ✅ Ya             | `.rar`            | `/path/final_backup`                        |
-| `7z`       | ✅ Ya             | `.7z`             | `/path/final_backup`                        |
-| `tar`      | ✅ Ya             | `.tar`, `.tar.gz`, `.tar.xz` | `/path/final_backup`            |
+| `zip`      | ✅ Ya             | `.zip`            | `/path/file_name`                        |
+| `rar`      | ✅ Ya             | `.rar`            | `/path/file_name`                        |
+| `7z`       | ✅ Ya             | `.7z`             | `/path/file_name`                        |
+| `tar`      | ✅ Ya             | `.tar`, `.tar.gz`, `.tar.xz` | `/path/file_name`            |
 | `unzip`    | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
 | `unrar`    | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
 | `un7z`     | ❌ Tidak          | -                 | `/path/ekstrak/`                            |
